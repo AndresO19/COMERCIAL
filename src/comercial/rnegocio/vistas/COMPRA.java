@@ -83,6 +83,8 @@ public class COMPRA extends JInternalFrame{
         pnlA.add(txDescripcion);
         pnlA.add(Precio);
         pnlA.add(txPrecio);
+        pnlB.add(btnAceptar);
+        pnlB.add(btnLimpiar);
         
         
         btnAceptar.addActionListener(new ActionListener() {
@@ -121,10 +123,10 @@ public class COMPRA extends JInternalFrame{
              ncompra.setProducto((Producto) cmbProducto.getSelectedItem());
              ncompra.setDescripcion(txDescripcion.getText());
              ncompra.setPrecio(txPrecio.getText());
-              ICompra compras = new CompraImpl();
+              
               try{
                   
-                  if (compras.insertar(ncompra) > 0) {
+                  if (compraDao.insertar(ncompra) > 0) {
 
                 JOptionPane.showMessageDialog(this, "PROCESO CORRECTO!!", "Transaction", JOptionPane.INFORMATION_MESSAGE);
 
