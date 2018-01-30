@@ -54,7 +54,7 @@ public class CLIENTEV extends JInternalFrame {
         pnlcentral = new JPanel();
         pnlpie = new JPanel();
 
-        pnlcentral.setLayout(new GridLayout(3, 2, 5, 5));
+        pnlcentral.setLayout(new GridLayout(4, 2, 5, 5));
         pnlpie.setLayout(new GridLayout(1, 2, 5, 5));
         titulo = new JLabel("DATOS DEL CLIENTE");
 
