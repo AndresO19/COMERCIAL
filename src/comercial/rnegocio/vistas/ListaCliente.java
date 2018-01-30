@@ -14,6 +14,7 @@ public class ListaCliente extends JInternalFrame{
     JTable tabla;
     DefaultTableModel modelo;
     JScrollPane jscTabla;
+    
     public ListaCliente() {
       this.setSize(800,600);
         this.setLayout(new BorderLayout());

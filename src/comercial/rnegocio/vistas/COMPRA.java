@@ -5,6 +5,9 @@
  */
 package comercial.rnegocio.vistas;
 
+import comercial.rnegocio.dao.*;
+import comercial.rnegocio.entidades.*;
+import comercial.rnegocio.impl.*;
 import java.util.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -17,19 +20,27 @@ import javax.swing.*;
 
 public class COMPRA extends JInternalFrame{
     
+    List <Cliente> lstCliente; 
+    
+    List<Producto> lstProducto;
+    
+    JComboBox<Cliente> cmbCliente;
+    JComboBox<Producto> cmbProducto;
+    
     JLabel Titulo;
     JLabel Cliente;
     JLabel Producto;
     JLabel Descripcion;
     JLabel Precio;
   
-    JTextField txCliente;
-    JTextField txProducto;
+    
     JTextField txDescripcion;
     JTextField txPrecio;
     
     JButton btnLimpiar;
     JButton btnAceptar;
+    
+    
     
     JPanel pnlA;
     JPanel pnlB;
@@ -52,20 +63,22 @@ public class COMPRA extends JInternalFrame{
         Descripcion = new JLabel("Descripcion");
         Precio = new JLabel("Precio");
         
-        txCliente = new JTextField();
-        txProducto = new JTextField();
+        
         txDescripcion = new JTextField();
         txPrecio = new JTextField();
-        
+        cargarProducto();
+        cmbProducto = new JComboBox(lstProducto.toArray());
+        cargarCliente();
+        cmbCliente = new JComboBox(lstCliente.toArray());
         btnAceptar = new JButton("ACEPTAR");
         btnLimpiar = new JButton("LIMPIAR");
         
         this.add(Titulo, BorderLayout.NORTH);
         
         pnlA.add(Cliente);
-        pnlA.add(txCliente);
+        pnlA.add(cmbCliente);
         pnlA.add(Producto);
-        pnlA.add(txProducto);
+        pnlA.add(cmbProducto);
         pnlA.add(Descripcion);
         pnlA.add(txDescripcion);
         pnlA.add(Precio);
@@ -99,10 +112,52 @@ public class COMPRA extends JInternalFrame{
     }
        
        
-     public void btnAceptarActionListener(ActionEvent e) {
+     public void btnAceptarActionListener(ActionEvent e) {      
          
          
-            
+             ICompra compraDao = new CompraImpl();
+             Compra ncompra = new Compra();
+             ncompra.setCliente((Cliente) cmbCliente.getSelectedItem());
+             ncompra.setProducto((Producto) cmbProducto.getSelectedItem());
+             ncompra.setDescripcion(txDescripcion.getText());
+             ncompra.setPrecio(txPrecio.getText());
+              ICompra compras = new CompraImpl();
+              try{
+                  
+                  if (compras.insertar(ncompra) > 0) {
+
+                JOptionPane.showMessageDialog(this, "PROCESO CORRECTO!!", "Transaction", JOptionPane.INFORMATION_MESSAGE);
+
+             }
+            } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "PROCESO CORRECTO!!", "Transaction", JOptionPane.INFORMATION_MESSAGE);
+        }  
      }
+         
+
+    private void cargarProducto() {
+        
+        IProducto productoDao = new ProductoImpl();
+        try{
+            
+            lstProducto = productoDao.obtener();
+            
+        }catch(Exception ex){
+             JOptionPane.showMessageDialog(this, "ERROR AL CARGAR LOS PRODUCTOS!!", "Transaction", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void cargarCliente() {
+       
+        ICliente clienteDao = new ClienteImpl();
+        try{
+            
+            lstCliente = clienteDao.obtener();
+            
+        }catch(Exception ex){
+             JOptionPane.showMessageDialog(this, "ERROR AL CARGAR LOS CLIENTES!!", "Transaction", JOptionPane.ERROR_MESSAGE);
+        }
+    
+    }
     
 }
