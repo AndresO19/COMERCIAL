@@ -135,7 +135,7 @@ public class CLIENTEV extends JInternalFrame {
         frmMenu.setVisible(true);
 
     }
-//
+
     public void btnAceptarActionListener(ActionEvent e) {
         try {
             Cliente nCliente = new Cliente();
