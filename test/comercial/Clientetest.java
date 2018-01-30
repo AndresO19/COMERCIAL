@@ -20,16 +20,16 @@ public class Clientetest {
         ICliente clientetorDao=new ClienteImpl();
        // TEST INSERTAR
         
-        int filas=0;
-        Cliente clientetor=new Cliente("1", "DANIEL", "CANDO", "2358974125");
-        try {
-            filas=clientetorDao.insertar(clientetor);
-            System.out.println("Ingreso de " + filas + " Filas Correctas");
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-        assertEquals(filas>0, true);
-        
+//        int filas=0;
+//        Cliente clientetor=new Cliente("1", "DANIEL", "CANDO", "2358974125");
+//        try {
+//            filas=clientetorDao.insertar(clientetor);
+//            System.out.println("Ingreso de " + filas + " Filas Correctas");
+//        } catch (Exception e) {
+//            System.out.println("Error: " + e.getMessage());
+//        }
+//        assertEquals(filas>0, true);
+//        
         //TEST OBTENER POR CODIGO
 //        
         Cliente cliente=new Cliente();
@@ -40,15 +40,15 @@ public class Clientetest {
         }
         //*------------------------------------------------------------------------------------------------------------------------------------*
 //        
-//        //TEST LISTADO
-//        ArrayList<Cliente> clientetores=new ArrayList<>();
-//        try {
-//            clientetores=clientetorDao.obtener();
-//            for(Cliente clientet:clientetores){
-//                System.out.println(clientet.getCodigoc()+" "+clientet.getNombre()+" "+clientet.getApellido()+" "+clientet.getTelefono());
-//            }
-//        } catch (Exception e) {
-//        }
-//        assertEquals(clientetores!=null, true);
+        //TEST LISTADO
+        ArrayList<Cliente> clientetores=new ArrayList<>();
+        try {
+            clientetores=clientetorDao.obtener();
+            for(Cliente clientet:clientetores){
+                System.out.println(clientet.getCodigoc()+" "+clientet.getNombre()+" "+clientet.getApellido()+" "+clientet.getTelefono());
+            }
+        } catch (Exception e) {
+        }
+        assertEquals(clientetores!=null, true);
     } 
 }
