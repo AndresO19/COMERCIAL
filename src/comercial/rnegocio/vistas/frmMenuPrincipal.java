@@ -132,12 +132,12 @@ public class frmMenuPrincipal extends JFrame {
         eliminarCompra = new JMenuItem("Eliminar Compra");
         buscarCompra = new JMenuItem("Buscar Compra");
         listCompra = new JMenuItem("Listar Compra");
-//        listCliente.addActionListener( new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                listaClienteActionPerformed(e);
-//            }
-//        });
+        listCompra.addActionListener( new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                listaCompraActionPerformed(e);
+            }
+        });
         menuCompra.add(nuevoCompra);
         menuCompra.add(modificarCompra);
         menuCompra.add(eliminarCompra);
@@ -172,6 +172,11 @@ public class frmMenuPrincipal extends JFrame {
     
      public void listaClienteActionPerformed(ActionEvent e) {
         ListaCliente frm = new ListaCliente();
+        escritorio.add(frm);
+        frm.setVisible(true);
+    }
+      public void listaCompraActionPerformed(ActionEvent e) {
+        ListaCompra frm = new ListaCompra();
         escritorio.add(frm);
         frm.setVisible(true);
     }
