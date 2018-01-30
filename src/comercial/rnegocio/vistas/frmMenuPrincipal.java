@@ -1,86 +1,190 @@
 package comercial.rnegocio.vistas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import comercial.rnegocio.dao.*;
+import comercial.rnegocio.entidades.*;
+import comercial.rnegocio.impl.*;
+
 
 public class frmMenuPrincipal extends JFrame {
 
-    JLabel lblTitulo;
-    JLabel lblTitulo2;
-    JLabel lblTitulo3;;
-    JLabel lblGenero;
-    JLabel lblTiutlo0;
-    JTextField txtTitulo;
-    JTextField txtTitulo2;
-    JTextField txtTitulo3;
+    JMenuBar menuBarraPrincipal;
+    JMenu menuInicio;
+    JMenuItem menuItemLogin;
+    JMenuItem menuItemSalir;
+    ///////////////////////////////
+    JMenu menuCliente;
+    JMenuItem nuevoCliente;
+    JMenuItem modificarCliente;
+    JMenuItem eliminarCliente;
+    JMenuItem buscarCliente;
+    JMenuItem listCliente;
+    /////////////////////////////////////////
+    JMenu menuProducto;
+    JMenuItem nuevoProducto;
+    JMenuItem modificarProducto;
+    JMenuItem eliminarProducto;
+    JMenuItem buscarProducto;
+    JMenuItem listProducto;
+    ///////////////////////////////////////////////
+    JMenu menuCompra;
+    JMenuItem nuevoCompra;
+    JMenuItem modificarCompra;
+    JMenuItem eliminarCompra;
+    JMenuItem buscarCompra;
+    JMenuItem listCompra;
+    ///////////////////////////////////////
+    JDesktopPane escritorio;
 
-   JComboBox cmbGenero;
-    JButton btnLimpiar;
-    JButton btnAceptar;
-    JPanel pnlcentral;
-    JPanel pnlpie;
-    
     public frmMenuPrincipal() {
-        
-        this.setSize(640, 400); 
-        this.setLayout(new BorderLayout());
-        pnlcentral = new JPanel();
-        pnlpie = new JPanel();
-        
-        pnlcentral.setLayout(new GridLayout(4, 2, 5, 5));
-        pnlpie.setLayout(new GridLayout(1, 2, 5, 5));
-        lblTiutlo0 = new JLabel("DATOS ESTUDIANTILES");
-        
-        lblTitulo = new JLabel("ETIQUETA 1:");
-        lblTitulo2 = new JLabel("ETIQUETA 2:");
-        lblTitulo3 = new JLabel("ETIQUETA 3:");
-        lblGenero = new JLabel("GENERO");
-        txtTitulo = new JTextField(2);
-        txtTitulo2 = new JTextField(2);
-        txtTitulo3 = new JTextField(2);  
-        cmbGenero = new JComboBox(new String []{"masculino","femenino"});
-        btnLimpiar = new JButton("LIMPIAR");
-        btnAceptar = new JButton("ACEPTAR");
-        this.add(lblTiutlo0, BorderLayout.NORTH);
-        pnlcentral.add(lblTitulo);  
-        pnlcentral.add(txtTitulo);
-        pnlcentral.add(lblTitulo2);
-        pnlcentral.add(txtTitulo2);
-        pnlcentral.add(lblTitulo3); 
-        pnlcentral.add(txtTitulo3);
-        pnlcentral.add(lblGenero);
-        pnlcentral.add(cmbGenero);
-        pnlpie.add(btnLimpiar);
-        pnlpie.add(btnAceptar);
-        
-        btnAceptar.addActionListener(new ActionListener() {
+        escritorio = new JDesktopPane();
+        escritorio.setBackground(new Color(50, 30, 70));
+
+        menuBarraPrincipal = new JMenuBar();
+        //menu Inicio
+        menuInicio = new JMenu("Inicio");
+        menuItemLogin = new JMenuItem("Iniciar Sesion");
+        menuItemSalir = new JMenuItem("Salir");
+        menuItemSalir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    btnAceptarActionListener(e);
+                    menuSalirActionPerformed(e);
                 } catch (Exception ex) {
-                    System.out.print("error "+ex.getMessage());
+                    System.out.println("error: " + ex.getMessage());
                 }
             }
         });
-        this.add(lblTiutlo0, BorderLayout.NORTH);
-        this.add(pnlcentral, BorderLayout.CENTER);
-        this.add(pnlpie, BorderLayout.SOUTH);
+        menuBarraPrincipal.add(menuInicio);
+        menuInicio.add(menuItemLogin);
+        menuInicio.add(menuItemSalir);
+        
+        menuCliente = new JMenu("CLIENTE");
+        nuevoCliente = new JMenuItem("Nuevo CLIENTE");
+        nuevoCliente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                NuevoClienteActionPerformed(e);
+            }
+        });
+        modificarCliente = new JMenuItem("Modificar Cliente");
+        eliminarCliente = new JMenuItem("Eliminar Cliente");
+        buscarCliente = new JMenuItem("Buscar Cliente");
+        listCliente = new JMenuItem("Listar Clientes");
+        listCliente.addActionListener( new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                listaClienteActionPerformed(e);
+            }
+        });
+        menuCliente.add(nuevoCliente);
+        menuCliente.add(modificarCliente);
+        menuCliente.add(eliminarCliente);
+        menuCliente.addSeparator();
+        menuCliente.add(buscarCliente);
+        menuCliente.add(listCliente);
+        
+        menuBarraPrincipal.add(menuCliente);
+       
+        ////////////////////////////////////////////
+        menuProducto = new JMenu("PRODUCTO");
+        nuevoProducto = new JMenuItem("Nuevo Producto");
+//        nuevoProducto.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                NuevoProductoActionPerformed(e);
+//            }
+//        });
+        modificarProducto = new JMenuItem("Modificar Producto");
+        eliminarProducto = new JMenuItem("Eliminar Producto");
+        buscarProducto = new JMenuItem("Buscar Producto");
+        listProducto = new JMenuItem("Listar Producto");
+//        listCliente.addActionListener( new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                listaClienteActionPerformed(e);
+//            }
+//        });
+        menuProducto.add(nuevoProducto);
+        menuProducto.add(modificarProducto);
+        menuProducto.add(eliminarProducto);
+        menuProducto.addSeparator();
+        menuProducto.add(buscarProducto);
+        menuProducto.add(listProducto);
+        
+        menuBarraPrincipal.add(menuProducto);
+       
+        ///////////////////////////////////////////////////////////////
+        menuCompra = new JMenu("COMPRA");
+        nuevoCompra = new JMenuItem("Nueva Compra");
+        nuevoCompra.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                NuevoCompraActionPerformed(e);
+            }
+        });
+        modificarCompra = new JMenuItem("Modificar Compra");
+        eliminarCompra = new JMenuItem("Eliminar Compra");
+        buscarCompra = new JMenuItem("Buscar Compra");
+        listCompra = new JMenuItem("Listar Compra");
+//        listCliente.addActionListener( new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                listaClienteActionPerformed(e);
+//            }
+//        });
+        menuCompra.add(nuevoCompra);
+        menuCompra.add(modificarCompra);
+        menuCompra.add(eliminarCompra);
+        menuCompra.addSeparator();
+        menuCompra.add(buscarCompra);
+        menuCompra.add(listCompra);
+        
+        menuBarraPrincipal.add(menuCompra);
+       
+        ///////////////////////////////////////////////////////////////////////
         
         
+        
+        this.setLayout(new BorderLayout());
+        //this.setSize(360,240);
+        this.add(menuBarraPrincipal, BorderLayout.NORTH);
+        this.add(escritorio, BorderLayout.CENTER);
+        this.setExtendedState(MAXIMIZED_BOTH); //PARA MAXIMIZAR LA VENTANA
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);//terminar proceso de la ventana ejecutada
+        
+
+    }
+
+    public static void main(String[] args) {
+        frmMenuPrincipal ventana = new frmMenuPrincipal();
+        ventana.setVisible(true);
+    }
+
+    public void menuSalirActionPerformed(ActionEvent e) {
+        System.exit(0);
     }
     
-    public static void main(String[] args) {
-        
-        frmMenuPrincipal frmMenu = new frmMenuPrincipal();
-        frmMenu.setVisible(true);
-        
-        
+     public void listaClienteActionPerformed(ActionEvent e) {
+        ListaCliente frm = new ListaCliente();
+        escritorio.add(frm);
+        frm.setVisible(true);
     }
-    public void btnAceptarActionListener(ActionEvent e){
-        JOptionPane.showMessageDialog(this, "PROCESO CORRECTO!!", "Transaction",JOptionPane.INFORMATION_MESSAGE);
+     
+     public void NuevoClienteActionPerformed(ActionEvent e) {
+        CLIENTEV frm = new CLIENTEV();
+        escritorio.add(frm);
+        frm.setVisible(true);
+    }
+
+      public void NuevoCompraActionPerformed(ActionEvent e) {
+        COMPRA frm = new COMPRA();
+        escritorio.add(frm);
+        frm.setVisible(true);
     }
 }
