@@ -9,14 +9,17 @@ import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.*;
+import comercial.rnegocio.dao.*;
+import comercial.rnegocio.entidades.*;
+import comercial.rnegocio.impl.*;
 
-//public class CLIENTEV extends JInternalFrame {
-//
-//    JLabel titulo0;
-//    JLabel codigo;
-//    JLabel cedula;
-//    JLabel nombres;
-//    JLabel apellidos;
+public class CLIENTEV extends JInternalFrame {
+
+    JLabel titulo;
+    JLabel codigoc;
+    JLabel nombre;
+    JLabel apellido;
+    JLabel telefono;
 //    JLabel telefono;
 //    JLabel direccion;
 //    JLabel categoria;
@@ -25,10 +28,10 @@ import javax.swing.*;
 //    JLabel fechaIngreso;
 //    JLabel salario;
 //
-//    JTextField txcod;
-//    JTextField txcedu;
-//    JTextField txNombre;
-//    JTextField txApellido;
+    JTextField txtCod;
+    JTextField txtNombre;
+    JTextField txtApellido;
+    JTextField txtTelefono;
 //    JTextField txTelf;
 //    JTextField txDir;
 //    JComboBox<String> cmdCateg;
@@ -38,27 +41,27 @@ import javax.swing.*;
 //    JTextField txSalario;
 //
 //    JComboBox cmbGenero;
-//    JButton btnLimpiar;
-//    JButton btnAceptar;
-//    JPanel pnlcentral;
-//    JPanel pnlpie;
+    JButton btnLimpiar;
+    JButton btnAceptar;
+    JPanel pnlcentral;
+    JPanel pnlpie;
 //
-//    public CLIENTEV() {
+    public CLIENTEV() {
 //
-//        this.setSize(640, 400);
-//        this.setLayout(new BorderLayout());
-//        pnlcentral = new JPanel();
-//        pnlpie = new JPanel();
-//
-//        pnlcentral.setLayout(new GridLayout(12, 2, 5, 5));
-//        pnlpie.setLayout(new GridLayout(1, 2, 5, 5));
-//        titulo0 = new JLabel("DATOS DOCENTES");
-//
-//        codigo = new JLabel("CODIGO ESTUDIANTE");
-//
-//        cedula = new JLabel("NUMERO CEDULA");
-//        nombres = new JLabel("NOMBRE");
-//        apellidos = new JLabel("APELLIDO");
+        this.setSize(640, 400);
+        this.setLayout(new BorderLayout());
+        pnlcentral = new JPanel();
+        pnlpie = new JPanel();
+
+        pnlcentral.setLayout(new GridLayout(3, 2, 5, 5));
+        pnlpie.setLayout(new GridLayout(1, 2, 5, 5));
+        titulo = new JLabel("DATOS DEL CLIENTE");
+
+        codigoc = new JLabel("Codigo Cliente: ");
+
+        nombre = new JLabel("Nombre: ");
+        apellido = new JLabel("Apellido: ");
+        telefono = new JLabel("Numero de Telefono: ");
 //        telefono = new JLabel("NUMERO TELEFONO");
 //        direccion = new JLabel("DIRECCION");
 //        categoria = new JLabel("A");
@@ -67,10 +70,10 @@ import javax.swing.*;
 //        fechaIngreso = new JLabel("FECHA INGRESO");
 //        salario = new JLabel("salario");
 //
-//        txcod = new JTextField();
-//        txcedu = new JTextField();
-//        txNombre = new JTextField();
-//        txApellido = new JTextField();
+        txtCod = new JTextField();
+        txtNombre = new JTextField();
+        txtApellido = new JTextField();
+        txtTelefono = new JTextField();
 //        txTelf = new JTextField();
 //        txDir = new JTextField();
 //        cmdCateg = new JComboBox<String>(new String[]{"Contrato", "Nombramiento"});
@@ -79,17 +82,17 @@ import javax.swing.*;
 //        txFechIng = new JTextField();
 //        txSalario = new JTextField();
 //        cmbGenero = new JComboBox(new String[]{"masculino", "femenino"});
-//        btnLimpiar = new JButton("LIMPIAR");
-//        btnAceptar = new JButton("ACEPTAR");
-//        this.add(titulo0, BorderLayout.NORTH);
-//        pnlcentral.add(codigo);
-//        pnlcentral.add(txcod);
-//        pnlcentral.add(cedula);
-//        pnlcentral.add(txcedu);
-//        pnlcentral.add(nombres);
-//        pnlcentral.add(txNombre);
-//        pnlcentral.add(apellidos);
-//        pnlcentral.add(txApellido);
+        btnLimpiar = new JButton("LIMPIAR");
+        btnAceptar = new JButton("ACEPTAR");
+        this.add(titulo, BorderLayout.NORTH);
+        pnlcentral.add(codigoc);
+        pnlcentral.add(txtCod);
+        pnlcentral.add(nombre);
+        pnlcentral.add(txtNombre);
+        pnlcentral.add(apellido);
+        pnlcentral.add(txtApellido);
+        pnlcentral.add(telefono);
+        pnlcentral.add(txtTelefono);
 //        pnlcentral.add(telefono);
 //        pnlcentral.add(txTelf);
 //        pnlcentral.add(direccion);
@@ -105,60 +108,60 @@ import javax.swing.*;
 //        pnlcentral.add(salario);
 //        pnlcentral.add(txSalario);
 //
-//        pnlpie.add(btnLimpiar);
-//        pnlpie.add(btnAceptar);
+        pnlpie.add(btnLimpiar);
+        pnlpie.add(btnAceptar);
 //
-//        btnAceptar.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                try {
-//                    btnAceptarActionListener(e);
-//                } catch (Exception ex) {
-//                    System.out.print("error " + ex.getMessage());
-//                }
-//            }
-//        });
-//        this.add(titulo0, BorderLayout.NORTH);
-//        this.add(pnlcentral, BorderLayout.CENTER);
-//        this.add(pnlpie, BorderLayout.SOUTH);
-//        this.setClosable(true);
-//
-//    }
-//
-//    public static void main(String[] args) {
-//
-//        CLIENTEV frmMenu = new CLIENTEV();
-//        frmMenu.setVisible(true);
-//
-//    }
-//
-//    public void btnAceptarActionListener(ActionEvent e) {
-//        try {
-////////           // Docente nDocente = new Docente();
-////            nDocente.setCodigo(Integer.parseInt(txcod.getText()));
-////            nDocente.setCedula(txcedu.getText());
-////            nDocente.setNombres(txNombre.getText());
-////            nDocente.setApellidos(txApellido.getText());
-////            nDocente.setTelefono(txTelf.getText());
-////            nDocente.setDireccion(txDir.getText());
-////            nDocente.setCategoria(cmdCateg.getSelectedIndex() == 0 ? "C" : "N");
-////            nDocente.setSexo(cmbGenero.getSelectedIndex() == 0 ? "M" : "F");
-////            DateFormat formatoFecha=new SimpleDateFormat("yyyy-MM-dd");
-////            try {
-////                nDocente.setFechaNacimiento(formatoFecha.parse(txFechaNac.getText()));
-////                nDocente.setFechaIngreso(formatoFecha.parse(txFechIng.getText()));
-////            } catch (Exception er) {
-////                JOptionPane.showMessageDialog(this, "ERROR DE FECHA!!"+er.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-////            }
-////            nDocente.setSalario(Double.parseDouble(txSalario.getText()));
-////            IDocente docDao = new DocenteImpl();
-////            if (docDao.insertar(nDocente) > 0) {
-//                JOptionPane.showMessageDialog(this, "PROCESO CORRECTO!!", "Transaction", JOptionPane.INFORMATION_MESSAGE);
-////            }
-////        } catch (Exception ex) {
-////            JOptionPane.showMessageDialog(this, "PROCESO FALLIDO!!"+ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-////        }
-//
-//    }
+        btnAceptar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    btnAceptarActionListener(e);
+                } catch (Exception ex) {
+                    System.out.print("error " + ex.getMessage());
+                }
+            }
+        });
+        this.add(titulo, BorderLayout.NORTH);
+        this.add(pnlcentral, BorderLayout.CENTER);
+        this.add(pnlpie, BorderLayout.SOUTH);
+        this.setClosable(true);
 
-//}
+    }
+
+    public static void main(String[] args) {
+
+        CLIENTEV frmMenu = new CLIENTEV();
+        frmMenu.setVisible(true);
+
+    }
+//
+    public void btnAceptarActionListener(ActionEvent e) {
+        try {
+            Cliente nCliente = new Cliente();
+            nCliente.setCodigoc(txtCod.getText());
+            nCliente.setNombre(txtNombre.getText());
+            nCliente.setApellido(txtApellido.getText());
+            nCliente.setTelefono(txtTelefono.getText());
+//            nCliente.setTelefono(txTelf.getText());
+//            nCliente.setDireccion(txDir.getText());
+//            nCliente.setCategoria(cmdCateg.getSelectedIndex() == 0 ? "C" : "N");
+//            nCliente.setSexo(cmbGenero.getSelectedIndex() == 0 ? "M" : "F");
+//            DateFormat formatoFecha=new SimpleDateFormat("yyyy-MM-dd");
+//            try {
+//                nCliente.setFechaNacimiento(formatoFecha.parse(txFechaNac.getText()));
+//                nCliente.setFechaIngreso(formatoFecha.parse(txFechIng.getText()));
+//            } catch (Exception er) {
+//                JOptionPane.showMessageDialog(this, "ERROR DE FECHA!!"+er.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//            }
+//            nCliente.setSalario(Double.parseDouble(txSalario.getText()));
+            ICliente cliDao = new ClienteImpl();
+            if (cliDao.insertar(nCliente) > 0) {
+                JOptionPane.showMessageDialog(this, "PROCESO CORRECTO!!", "Transaction", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "PROCESO FALLIDO!!"+ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+}
