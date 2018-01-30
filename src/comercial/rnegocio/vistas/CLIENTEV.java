@@ -46,6 +46,7 @@ public class CLIENTEV extends JInternalFrame {
     JPanel pnlcentral;
     JPanel pnlpie;
 //
+    
     public CLIENTEV() {
 //
         this.setSize(640, 400);
