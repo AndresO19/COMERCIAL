@@ -44,8 +44,8 @@ public class ListaCompra extends JInternalFrame{
                     JOptionPane.ERROR_MESSAGE);
         }
         for(Compra c : lista){
-        modelo.addRow(new Object[]{ c.getCliente(),
-        c.getProducto(),c.getDescripcion(),c.getPrecio()});
+        modelo.addRow(new Object[]{ c.getCliente().getCodigoc(),
+        c.getProducto().getCodigop(),c.getDescripcion(),c.getPrecio()});
         }
         tabla.setModel(modelo);
     }
