@@ -94,22 +94,22 @@ public class frmMenuPrincipal extends JFrame {
         ////////////////////////////////////////////
         menuProducto = new JMenu("PRODUCTO");
         nuevoProducto = new JMenuItem("Nuevo Producto");
-//        nuevoProducto.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                NuevoProductoActionPerformed(e);
-//            }
-//        });
+        nuevoProducto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                NuevoProductoActionPerformed(e);
+            }
+        });
         modificarProducto = new JMenuItem("Modificar Producto");
         eliminarProducto = new JMenuItem("Eliminar Producto");
         buscarProducto = new JMenuItem("Buscar Producto");
         listProducto = new JMenuItem("Listar Producto");
-//        listCliente.addActionListener( new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                listaClienteActionPerformed(e);
-//            }
-//        });
+        listProducto.addActionListener( new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                listaProductoActionPerformed(e);
+            }
+        });
         menuProducto.add(nuevoProducto);
         menuProducto.add(modificarProducto);
         menuProducto.add(eliminarProducto);
@@ -176,6 +176,11 @@ public class frmMenuPrincipal extends JFrame {
         frm.setVisible(true);
     }
      
+     public void listaProductoActionPerformed(ActionEvent e) {
+        ListaProducto frm = new ListaProducto();
+        escritorio.add(frm);
+        frm.setVisible(true);
+    }
      public void NuevoClienteActionPerformed(ActionEvent e) {
         CLIENTEV frm = new CLIENTEV();
         escritorio.add(frm);
@@ -184,6 +189,12 @@ public class frmMenuPrincipal extends JFrame {
 
       public void NuevoCompraActionPerformed(ActionEvent e) {
         COMPRA frm = new COMPRA();
+        escritorio.add(frm);
+        frm.setVisible(true);
+    }
+      
+       public void NuevoProductoActionPerformed(ActionEvent e) {
+        PRODUCTOV frm = new PRODUCTOV();
         escritorio.add(frm);
         frm.setVisible(true);
     }
